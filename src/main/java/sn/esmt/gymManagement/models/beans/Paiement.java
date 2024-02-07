@@ -1,14 +1,18 @@
 package sn.esmt.gymManagement.models.beans;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
-@Entity(name = "t_paiement")
+@Entity(name = "T_Paiement")
 public class Paiement {
 	
 	@Id
@@ -20,8 +24,20 @@ public class Paiement {
 	
 	private boolean isCarnet;
 	
-	private LocalDate paymentDate;
+	private LocalDateTime paymentDate;
 	
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_user")
+	private Utilisateur user;
+	
+	public Paiement() {}
+	
+	public Paiement(double montant, Utilisateur user) {
+		this.setMontant(montant);
+		this.setUser(user);
+		this.setPaymentDate();
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -38,12 +54,12 @@ public class Paiement {
 		this.montant = montant;
 	}
 	
-	public LocalDate getPaymentDate() {
+	public LocalDateTime getPaymentDate() {
 		return paymentDate;
 	}
 	
-	public void setPaymentDate(LocalDate paymentDate) {
-		this.paymentDate = paymentDate;
+	private void setPaymentDate() {
+		this.paymentDate = LocalDateTime.now();
 	}
 
 	public boolean isCarnet() {
@@ -53,4 +69,13 @@ public class Paiement {
 	public void setCarnet(boolean isCarnet) {
 		this.isCarnet = isCarnet;
 	}
+	
+	public Utilisateur getUser() {
+		return user;
+	}
+
+	public void setUser(Utilisateur user) {
+		this.user = user;
+	}
+
 }

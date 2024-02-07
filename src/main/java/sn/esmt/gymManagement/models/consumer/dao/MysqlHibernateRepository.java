@@ -11,7 +11,7 @@ import org.hibernate.query.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-import sn.esmt.gymManagement.models.business.HibernateSession;
+import sn.esmt.gymManagement.models.business.config.HibernateSession;
 import sn.esmt.gymManagement.models.consumer.exceptions.CrudDaoException;
 
 public class MysqlHibernateRepository implements IRepository {
@@ -26,11 +26,8 @@ public class MysqlHibernateRepository implements IRepository {
 	
 	private MysqlHibernateRepository() {}
 	
-	public MysqlHibernateRepository getInstance() {
-		if (repository == null)
-			repository = new MysqlHibernateRepository();
-		
-		return repository;
+	public static MysqlHibernateRepository getInstance() {
+		return (repository == null) ? new MysqlHibernateRepository() : repository;
 	}
 	
 	@Override

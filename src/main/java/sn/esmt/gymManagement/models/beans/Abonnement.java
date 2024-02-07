@@ -2,22 +2,15 @@ package sn.esmt.gymManagement.models.beans;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import sn.esmt.gymManagement.models.beans.enums.TypeAbonnement;
 
-@Entity(name = "t_abonnement")
+@Entity
+@DiscriminatorValue("ABN")
 public class Abonnement extends Souscription {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_abonnement")
-	private int id;
 	
 	private double subscribeMontant;
 	
@@ -28,36 +21,29 @@ public class Abonnement extends Souscription {
 	@Enumerated(EnumType.STRING)
 	private TypeAbonnement subscribeType;
 	
-	public int getId() {
-		return id;
-	}
+	public Abonnement() {}	
 	
-	public void setId(int id) {
-		this.id = id;
+	public Abonnement(TypeAbonnement subscribeType) {
+		super();
+		this.setSubscribeType(subscribeType);
+		this.setSubscribeMontant();
+		this.setEndDate();
 	}
 	
 	public double getSubscribeMontant() {
 		return subscribeMontant;
 	}
 	
-	public void setSubscribeMontant(double subscribeMontant) {
-		this.subscribeMontant = subscribeMontant;
-	}
-	
-	public LocalDateTime getStartDate() {
-		return startDate;
-	}
-	
-	public void setStartDate(LocalDateTime startDate) {
-		this.startDate = startDate;
+	private void setSubscribeMontant() {
+		this.subscribeMontant = defineSubscribePrice();
 	}
 	
 	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 	
-	public void setEndDate(LocalDateTime endDate) {
-		this.endDate = endDate;
+	private void setEndDate() {
+		this.endDate = this.startDate.plusMonths(this.subscribeType.getValue());
 	}
 
 	public TypeAbonnement getSubscribeType() {
@@ -68,5 +54,22 @@ public class Abonnement extends Souscription {
 		this.subscribeType = subscribeType;
 	}
 	
-	
+	private int defineSubscribePrice() {
+		int subscribePrice = 0;
+		
+		switch(this.subscribeType) {
+			case MENSUEL : 
+				subscribePrice = 25000;
+				break;
+			case TRIMESTRIEL : 
+				subscribePrice = 60000;
+				break;
+			case ANNUEL :
+				subscribePrice = 275000;
+				break;
+		}
+		
+		return subscribePrice;
+
+	}
 }

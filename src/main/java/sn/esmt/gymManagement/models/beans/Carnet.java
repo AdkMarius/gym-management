@@ -1,46 +1,46 @@
 package sn.esmt.gymManagement.models.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
-@Entity(name = "t_carnet")
+@Entity
+@DiscriminatorValue("ABN")
 public class Carnet extends Souscription{
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_carnet")
-	private int id;
 	
 	private double priceOfCarnet;
 	
 	private int sessionNumber;
 	
-	private int effectifSessionNumber;
+	@Column(name = "eNumber")
+	private int effectifSessionNumber = 0;
 	
-	@OneToMany(mappedBy = "carnet", cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Paiement> paiymentList;
 	
-	public int getId() {
-		return id;
-	}
+	private static final int SESSION_PRICE = 1000;
 	
-	public void setId(int id) {
-		this.id = id;
+	public Carnet() {}	
+	
+	public Carnet(int sessionNumber) {
+		super();
+		this.setSessionNumber(sessionNumber);
+		this.setPriceOfCarnet();
+		this.setEffectifSessionNumber();
 	}
 	
 	public double getPriceOfCarnet() {
 		return priceOfCarnet;
 	}
 	
-	public void setPriceOfCarnet(double priceOfCarnet) {
-		this.priceOfCarnet = priceOfCarnet;
+	private void setPriceOfCarnet() {
+		this.priceOfCarnet = SESSION_PRICE * this.sessionNumber;
 	}
 	
 	public int getSessionNumber() {
@@ -55,16 +55,24 @@ public class Carnet extends Souscription{
 		return effectifSessionNumber;
 	}
 	
-	public void setEffectifSessionNumber(int effectifSessionNumber) {
-		this.effectifSessionNumber = effectifSessionNumber;
+	public void setEffectifSessionNumber() {
+		this.effectifSessionNumber++;
 	}
 	
 	public List<Paiement> getPaiymentList() {
-		return paiymentList;
+		return new ArrayList<Paiement>(this.paiymentList);
 	}
 	
-	public void setPaiymentList(List<Paiement> paiymentList) {
-		this.paiymentList = paiymentList;
+	public void setPaiymentList(List<Paiement> listPaiement) {
+		this.paiymentList = listPaiement;
+	}
+	
+	public void addPaiement(Paiement paiement) {
+		this.paiymentList.add(paiement);
+	}
+	
+	public void removePaiemebt(Paiement paiement) {
+		this.paiymentList.remove(paiement);
 	}
 	
 }

@@ -3,6 +3,7 @@ package sn.esmt.gymManagement.models.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,12 +12,10 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import sn.esmt.gymManagement.models.beans.enums.TypeUtilisateur;
 
-@Entity(name = "t_utilisateur")
+@Entity(name = "T_Utilisateur")
 public class Utilisateur {
 	
 	@Id
@@ -34,20 +33,20 @@ public class Utilisateur {
 	
 	@Enumerated(EnumType.STRING)
 	private TypeUtilisateur userType;
+
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private List<Role> listRole = new ArrayList<Role>();
 	
-	@OneToOne
-	@JoinColumn(name = "role_id")
-	private Role role;
-	
-	@OneToMany(fetch = FetchType.EAGER)
-	private List<Souscription> subscribeList = new ArrayList<>();
-	
+	public Utilisateur(String firstName, String lastName, String email, String password, TypeUtilisateur userType) {
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
+		this.setEmail(email);
+		this.setPassword(password);
+		this.setUserType(userType);
+	}
+
 	public int getId() {
 		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public String getFirstName() {
@@ -89,22 +88,20 @@ public class Utilisateur {
 	public void setUserType(TypeUtilisateur userType) {
 		this.userType = userType;
 	}
-	
-	public Role getRole() {
-		return role;
-	}
-	
-	public void setRole(Role role) {
-		this.role = role;
+
+	public List<Role> getListRole() {
+		return new ArrayList<Role>(this.listRole);
 	}
 
-	public List<Souscription> getSubscribeList() {
-		return subscribeList;
-	}
-
-	public void setSubscribeList(List<Souscription> subscribeList) {
-		this.subscribeList = subscribeList;
+	public void setListRole(List<Role> listRole) {
+		this.listRole = listRole;
 	}
 	
+	public void addRole(Role role) {
+		this.listRole.add(role);
+	}
 	
+	public void removeRole(Role role) {
+		this.listRole.remove(role);
+	}
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,7 +17,7 @@ import jakarta.persistence.OneToMany;
 import sn.esmt.gymManagement.models.beans.enums.GenderType;
 import sn.esmt.gymManagement.models.beans.enums.TypePiece;
 
-@Entity(name = "t_client")
+@Entity(name = "T_Client")
 public class Client {
 	
 	@Id
@@ -34,6 +35,7 @@ public class Client {
 	@Enumerated(EnumType.STRING)
 	private TypePiece piece;
 	
+	@Column(name = "id_piece")
 	private String identifierPiece;
 	
 	private String email;
@@ -44,15 +46,27 @@ public class Client {
 	
 	private LocalDate dateOfBirth;
 	
-	@OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Souscription> subscribeList = new ArrayList<>();
+	
+	public Client() {}
+
+	public Client(String firstName, String lastName, GenderType gender, TypePiece piece, String identifierPiece,
+			String email, String password, String phoneNumber, LocalDate dateOfBirth) {
+		
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
+		this.setGender(gender);
+		this.setPiece(piece);
+		this.setIdentifierPiece(identifierPiece);
+		this.setEmail(email);
+		this.setPassword(password);
+		this.setPhoneNumber(phoneNumber);
+		this.setDateOfBirth(dateOfBirth);
+	}
 
 	public int getId() {
 		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public String getFirstName() {
@@ -128,11 +142,18 @@ public class Client {
 	}
 	
 	public List<Souscription> getSubscribeList() {
-		return subscribeList;
+		return new ArrayList<>(this.subscribeList);
 	}
 
-	public void setSubscribeList(List<Souscription> subscribeList) {
-		this.subscribeList = subscribeList;
+	public void setSubscribeList(List<Souscription> listSouscription) {
+		this.subscribeList = listSouscription;
 	}
 	
+	public void addSubscribe(Souscription souscription) {
+		this.subscribeList.add(souscription);
+	}
+	
+	public void removeSubscribe(Souscription souscription) {
+		this.subscribeList.remove(souscription);
+	}
 }
