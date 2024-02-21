@@ -35,7 +35,6 @@ public class Privilege {
 	}
 	
 	public void setPrivilege(TypePrivilege privilege) {
-		this.privilege = privilege;
-		
+		this.privilege = privilege;	
 	}
 }

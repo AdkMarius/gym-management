@@ -5,9 +5,9 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sn.esmt.gymManagement.models.business.config.DataLoad;
 
 public class GymManagementApplication extends Application 
 {
@@ -21,9 +21,10 @@ public class GymManagementApplication extends Application
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		DataLoad.loadAllData();
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Login");
-		this.primaryStage.setResizable(false);
+		this.primaryStage.setResizable(true);
 		//this.primaryStage.getIcons().add(new Image(""));
 		
 		this.showMainView();
@@ -37,5 +38,5 @@ public class GymManagementApplication extends Application
 		Scene scene = new Scene(rootLayout);
 		this.primaryStage.setScene(scene);
 		this.primaryStage.show();
-	}
+ 	}
 }

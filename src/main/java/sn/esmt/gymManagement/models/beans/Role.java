@@ -6,11 +6,12 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import sn.esmt.gymManagement.models.beans.enums.TypeRole;
 
@@ -22,6 +23,7 @@ public class Role {
 	@Column(name = "id_role")
 	private int id;
 	
+	@Enumerated(EnumType.STRING)
 	private TypeRole role;
 	
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
@@ -29,8 +31,9 @@ public class Role {
 	
 	public Role() {}
 
-	public Role(TypeRole role) {
+	public Role(TypeRole role, List<Privilege> privileges) {
 		this.setRole(role);
+		this.setListPrivilege(privileges);
 	}
 
 	public int getId() {

@@ -37,12 +37,15 @@ public class Utilisateur {
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Role> listRole = new ArrayList<Role>();
 	
-	public Utilisateur(String firstName, String lastName, String email, String password, TypeUtilisateur userType) {
+	public Utilisateur() {}	
+	
+	public Utilisateur(String firstName, String lastName, String email, String password, TypeUtilisateur userType, List<Role> listRole) {
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setEmail(email);
 		this.setPassword(password);
 		this.setUserType(userType);
+		this.setListRole(listRole);
 	}
 
 	public int getId() {

@@ -2,7 +2,7 @@ package sn.esmt.gymManagement.models.consumer.dao;
 
 import java.util.List;
 
-import sn.esmt.gymManagement.models.consumer.exceptions.CrudDaoException;
+import sn.esmt.gymManagement.exceptions.CrudDaoException;
 
 public interface IRepository {
 	

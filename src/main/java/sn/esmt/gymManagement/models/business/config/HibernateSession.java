@@ -30,7 +30,7 @@ public class HibernateSession {
 	
 	// create hibernate's SessionFactory object
 	public static Session getSession () {
-        if (session == null) {
+        if (session == null || !session.isOpen()) {
             factory = getSessionFactory ();
             session = factory.openSession();
         }
@@ -41,9 +41,9 @@ public class HibernateSession {
         init();
         return factory;
     }
-
-    public static void init () {
-        if (factory == null ) {
+	
+	private static void init() {
+        if (factory == null || factory.isClosed()) {
             new HibernateSession();
             logger.info("HibernateSession created.");
         }

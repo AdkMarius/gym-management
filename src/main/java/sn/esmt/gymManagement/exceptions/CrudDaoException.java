@@ -1,4 +1,4 @@
-package sn.esmt.gymManagement.models.consumer.exceptions;
+package sn.esmt.gymManagement.exceptions;
 
 public class CrudDaoException extends Exception {
 

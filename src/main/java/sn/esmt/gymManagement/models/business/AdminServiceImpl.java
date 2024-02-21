@@ -2,11 +2,11 @@ package sn.esmt.gymManagement.models.business;
 
 import java.util.List;
 
-
+import sn.esmt.gymManagement.exceptions.CrudDaoException;
 import sn.esmt.gymManagement.models.beans.Privilege;
 import sn.esmt.gymManagement.models.beans.Role;
+import sn.esmt.gymManagement.models.beans.Utilisateur;
 import sn.esmt.gymManagement.models.consumer.dao.MysqlHibernateRepository;
-import sn.esmt.gymManagement.models.consumer.exceptions.CrudDaoException;
 
 public class AdminServiceImpl implements AdminService {
 
@@ -43,6 +43,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int countRole() throws CrudDaoException {
 		return getRoles().size();
+	}
+
+	@Override
+	public Utilisateur addUser(Utilisateur user) throws CrudDaoException {
+		return repository.create(user);
+	}
+
+	@Override
+	public List<Utilisateur> getUsers() throws CrudDaoException {
+		return repository.list(Utilisateur.class);
 	}
 
 }

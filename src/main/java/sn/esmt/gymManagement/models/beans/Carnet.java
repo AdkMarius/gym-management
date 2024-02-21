@@ -1,4 +1,4 @@
-package sn.esmt.gymManagement.models.beans;
+ package sn.esmt.gymManagement.models.beans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
 @Entity
-@DiscriminatorValue("ABN")
+@DiscriminatorValue("CAR")
 public class Carnet extends Souscription{
 	
 	private double priceOfCarnet;

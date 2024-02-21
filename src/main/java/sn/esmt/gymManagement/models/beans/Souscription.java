@@ -3,7 +3,6 @@ package sn.esmt.gymManagement.models.beans;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,8 +13,8 @@ import jakarta.persistence.InheritanceType;
 
 @Entity(name = "T_Souscription")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("SUB")
+@DiscriminatorColumn(name = "DTYPE")
+@DiscriminatorValue("null")
 public class Souscription {
 	
 	@Id

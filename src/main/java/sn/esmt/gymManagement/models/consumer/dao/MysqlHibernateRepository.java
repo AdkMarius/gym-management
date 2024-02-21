@@ -11,8 +11,8 @@ import org.hibernate.query.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import sn.esmt.gymManagement.exceptions.CrudDaoException;
 import sn.esmt.gymManagement.models.business.config.HibernateSession;
-import sn.esmt.gymManagement.models.consumer.exceptions.CrudDaoException;
 
 public class MysqlHibernateRepository implements IRepository {
 	
