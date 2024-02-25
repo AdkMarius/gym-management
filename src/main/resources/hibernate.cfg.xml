@@ -11,7 +11,7 @@
 		<!-- Assume test is the database name -->
 		<property name = "hibernate.connection.url">jdbc:mysql://localhost:3306/gym_management_db?serverTimezone=UTC</property>
 		<property name = "hibernate.connection.username">root</property>
-		<property name = "hibernate.connection.password">passer</property>
+		<property name = "hibernate.connection.password">mot2P@ss</property>
 
 		<mapping class="sn.esmt.gymManagement.models.beans.Abonnement" />
 		<mapping class="sn.esmt.gymManagement.models.beans.Carnet" />
