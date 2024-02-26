@@ -1,10 +1,12 @@
 package sn.esmt.gymManagement;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sn.esmt.gymManagement.models.business.config.DataLoad;
@@ -33,6 +35,8 @@ public class GymManagementApplication extends Application
 	private void showMainView() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(GymManagementApplication.class.getResource("auth/login.fxml"));
+		primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/assets/app-logo.png")).toExternalForm()));
+
 		this.rootLayout = (AnchorPane) loader.load();
 		
 		Scene scene = new Scene(rootLayout);

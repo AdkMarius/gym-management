@@ -1,30 +1,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <!-- =============================================================== -->
     <!-- Informations du projet -->
     <!-- =============================================================== -->
-    
-  <!-- ===== Informations Maven ===== -->
-  <groupId>sn.esmt</groupId>
-  <artifactId>gymManagement</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  
-  <!-- ===== Informations générales ===== -->
+
+    <!-- ===== Informations Maven ===== -->
+    <groupId>sn.esmt</groupId>
+    <artifactId>gymManagement</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <!-- ===== Informations générales ===== -->
     <name>Gym Management</name>
     <description>
         This application let to manage a gym salle.
     </description>
     <url>http://www.exemple.org/</url>
-    
+
     <!-- ===== Organisation ===== -->
     <organization>
         <name>School ESMT Dakar, Senegal</name>
         <url>https://esmt.sn/</url>
     </organization>
-    
+
     <!-- ===== Licences ===== -->
     <licenses>
         <license>
@@ -32,72 +32,107 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-    
+
     <developers>
-		<developer>
-			<name>Marius ADJAKOTAN</name>
-			<email>adkmarius01@gmail.com</email>
-		</developer>
-		
-		<developer>
-			<name>Horiane HOUNKANRIN</name>
-			<email>horianehkr@yahoo.com</email>
-		</developer>
-		
-		<developer>
-			<name>Micke-Phil GBAGUIDI</name>
-			<email>mickephilg@gmail.com</email>
-		</developer>
-	</developers>
+        <developer>
+            <name>Marius ADJAKOTAN</name>
+            <email>adkmarius01@gmail.com</email>
+        </developer>
+
+        <developer>
+            <name>Horiane HOUNKANRIN</name>
+            <email>horianehkr@yahoo.com</email>
+        </developer>
+
+        <developer>
+            <name>Micke-Phil GBAGUIDI</name>
+            <email>mickephilg@gmail.com</email>
+        </developer>
+    </developers>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}}</maven.compiler.target>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>21</version>
         </dependency>
-        
-		<dependency>
-		    <groupId>org.openjfx</groupId>
-		    <artifactId>javafx-fxml</artifactId>
-		    <version>21</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.openjfx</groupId>
-		    <artifactId>javafx-graphics</artifactId>
-		    <version>21</version>
-		</dependency>
 
-		<dependency>
-		    <groupId>org.junit.jupiter</groupId>
-		    <artifactId>junit-jupiter-api</artifactId>
-		    <version>5.10.1</version>
-		    <scope>test</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.hibernate.orm</groupId>
-		    <artifactId>hibernate-core</artifactId>
-		    <version>6.4.2.Final</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-core</artifactId>
-		    <version>2.22.1</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.mysql</groupId>
-		    <artifactId>mysql-connector-j</artifactId>
-		    <version>8.3.0</version>
-		</dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>21</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>21</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.4.2.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.22.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.3.0</version>
+        </dependency>
+
+        <!--        Other dependencies-->
+
+        <!-- https://mvnrepository.com/artifact/com.dlsc.formsfx/formsfx-core -->
+        <dependency>
+            <groupId>com.dlsc.formsfx</groupId>
+            <artifactId>formsfx-core</artifactId>
+            <version>11.4.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx -->
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>11.5.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.jfoenix/jfoenix -->
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-fontawesome-pack -->
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fontawesome-pack</artifactId>
+            <version>11.5.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-core -->
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-core</artifactId>
+            <version>11.5.0</version>
+        </dependency>
 
     </dependencies>
     <build>
@@ -111,10 +146,10 @@
                 </configuration>
             </plugin>
             <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-	    		<artifactId>maven-surefire-plugin</artifactId>
-	    		<version>3.2.5</version>
-			</plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -130,9 +165,9 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <!-- Plugin responsable de la génération du fichier JAR -->
-	         <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
