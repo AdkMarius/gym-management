@@ -25,6 +25,8 @@ public class Utilisateur {
 	@Enumerated(EnumType.STRING)
 	private TypeUtilisateur userType;
 
+	private boolean active;
+
 //	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Role> listRole = new ArrayList<Role>();
@@ -98,5 +100,17 @@ public class Utilisateur {
 	
 	public void removeRole(Role role) {
 		this.listRole.remove(role);
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getUserName() {
+		return this.getFirstName() + " " + this.getLastName();
 	}
 }

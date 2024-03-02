@@ -64,6 +64,7 @@
       </HBox>
       <MenuButton mnemonicParsing="false" prefHeight="37.0" prefWidth="21.0" styleClass="view-more" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="36.0">
          <items>
+            <MenuItem fx:id="activeGroupMenu" mnemonicParsing="false" onAction="#onActivate" text="Definir comme actif" />
             <MenuItem fx:id="editGroupMenu" mnemonicParsing="false" onAction="#onEdit" text="Modifier" />
             <MenuItem fx:id="deleteGroupMenu" mnemonicParsing="false" onAction="#onDelete" text="Supprimer" />
          </items>

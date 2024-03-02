@@ -167,6 +167,10 @@ public class EditUserController implements Initializable {
         this.utilisateur.setEmail(emailField.getText().trim());
         this.utilisateur.setListRole(this.rolesList);
 
+        if (Constants.utilisateur.getUserType() == TypeUtilisateur.DIRECTOR) {
+            this.utilisateur.setActive(true);
+        }
+
         new Thread(() -> {
             // TODO: 2/25/2024 Make DB request here 
             try {
