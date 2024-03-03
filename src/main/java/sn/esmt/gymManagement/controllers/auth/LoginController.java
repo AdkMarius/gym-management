@@ -124,6 +124,7 @@ public class LoginController implements Initializable {
                         Platform.runLater(() -> {
                             Constants.closeStage(actionEvent);
                             // display the user interface
+                            openCustomerHome();
                         });
                     } else {
                         Platform.runLater(() -> {
@@ -139,6 +140,25 @@ public class LoginController implements Initializable {
             }
         }).start();
     }
+
+    private void openCustomerHome() {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Gym Management - Customer Home");
+            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/assets/app-logo.png")).toExternalForm()));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GymManagementApplication.class.getResource("client/customer-home.fxml"));
+            Scene scene = new Scene(loader.load(), 800, 700);
+
+            stage.setScene(scene);
+            stage.setResizable(true);
+            stage.show();
+        } catch (IOException e) {
+            logger.error("Error while open user interface");
+        }
+
+    }
+
     private void loadPrivileges() {
         Constants.utilisateur.getListRole().forEach(role -> {
             Constants.USER_PRIVILEGE.addAll(role.getListPrivilege().stream().map(Privilege::getPrivilege).collect(Collectors.toList()));
@@ -164,6 +184,21 @@ public class LoginController implements Initializable {
     }
 
     private void openGymsManagementHome() {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Gyms Management");
+            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/assets/app-logo.png")).toExternalForm()));
+            stage.setResizable(false);
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GymManagementApplication.class.getResource("admin/management/management.fxml"));
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
 

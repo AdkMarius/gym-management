@@ -80,25 +80,6 @@ public class FrontAdminController implements Initializable {
     }
 
     public void onLogout(ActionEvent actionEvent) {
-        Node source = (Node) actionEvent.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
-
-
-        try {
-            Constants.logout();
-            stage = new Stage();
-            stage.setTitle("Settings");
-            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/assets/app-logo.png")).toExternalForm()));
-            stage.setResizable(false);
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(GymManagementApplication.class.getResource("auth/login.fxml"));
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Constants.onLogout(actionEvent);
     }
 }

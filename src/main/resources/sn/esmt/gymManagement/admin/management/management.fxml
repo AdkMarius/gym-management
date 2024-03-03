@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1266.0" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.esmt.gymManagement.controllers.admin.management.ManagementController">
+    <children>
+        <BorderPane layoutX="287.0" layoutY="209.0" prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <left>
+                <AnchorPane prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="300.0">
+                                    <children>
+                                        <VBox layoutX="20.0" layoutY="-7.0" prefWidth="260.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                                            <children>
+                                                <HBox>
+                                                    <children>
+                                                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@../../../../../assets/logo.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="My GYMS" textFill="#0078d4">
+                                                            <font>
+                                                                <Font size="24.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                </HBox>
+                                                <Label fx:id="adminName" text="Admin name">
+                                                    <font>
+                                                        <Font size="16.0" />
+                                                    </font>
+                                                    <VBox.margin>
+                                                        <Insets left="20.0" />
+                                                    </VBox.margin>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                                <VBox alignment="TOP_CENTER" spacing="5.0">
+                                    <children>
+                                        <ToggleButton fx:id="dashboardBtn" mnemonicParsing="false" onAction="#onDashboard" prefHeight="51.0" prefWidth="243.0" selected="true" styleClass="toggle-btn" text="Dashboard" textFill="WHITE">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets />
+                                            </VBox.margin>
+                                            <toggleGroup>
+                                                <ToggleGroup fx:id="dashMenu" />
+                                            </toggleGroup>
+                                            <graphic>
+                                                <SVGPath content="M11 3C11 1.89543 11.8954 1 13 1H15C16.1046 1 17 1.89543 17 3V5C17 6.10457 16.1046 7 15 7H13C11.8954 7 11 6.10457 11 5V3Z M1 13C1 11.8954 1.89543 11 3 11H5C6.10457 11 7 11.8954 7 13V15C7 16.1046 6.10457 17 5 17H3C1.89543 17 1 16.1046 1 15V13Z M11 13C11 11.8954 11.8954 11 13 11H15C16.1046 11 17 11.8954 17 13V15C17 16.1046 16.1046 17 15 17H13C11.8954 17 11 16.1046 11 15V13Z M1 3C1 1.89543 1.89543 1 3 1H5C6.10457 1 7 1.89543 7 3V5C7 6.10457 6.10457 7 5 7H3C1.89543 7 1 6.10457 1 5V3Z" fill="TRANSPARENT" fillRule="EVEN_ODD" stroke="#79797900" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="1.5" />
+                                            </graphic>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </ToggleButton>
+                                        <ToggleButton fx:id="customerBtn" mnemonicParsing="false" onAction="#onManageCustomer" prefHeight="51.0" prefWidth="243.0" styleClass="toggle-btn" text="Gestion des clients" textFill="WHITE" toggleGroup="$dashMenu">
+                                            <VBox.margin>
+                                                <Insets />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                            <graphic>
+                                                <SVGPath content="M11.8992 8.43194H9 M13.6624 16.4319H9 M13.6624 12.4319H9 M14.1411 4V6.51305C14.1411 7.73978 15.1337 8.73498 16.3596 8.73757C17.4973 8.74016 18.661 8.74102 18.7396 8.73584 M14.4405 4H8.45139C6.59787 4 5 5.45502 5 7.25091V16.5904C5 18.4874 6.49344 20 8.45139 20H15.6431C17.4976 20 19 18.3872 19 16.5904V8.59957L14.4405 4Z" fill="TRANSPARENT" fillRule="EVEN_ODD" stroke="#79797900" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="1.5" />
+                                            </graphic>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </ToggleButton>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </left>
+            <center>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <top>
+                        <AnchorPane fx:id="navParent" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                    </top>
+                    <center>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-insets: 0;" BorderPane.alignment="CENTER">
+                            <content>
+                                <BorderPane fx:id="containerPane" prefHeight="578.0" prefWidth="723.0" style="-fx-background-color: #E9E9E9;">
+                                    <padding>
+                                        <Insets bottom="50.0" />
+                                    </padding>
+                                </BorderPane>
+                            </content>
+                        </ScrollPane>
+                    </center>
+                </BorderPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
