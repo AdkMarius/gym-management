@@ -37,7 +37,8 @@ public class GlobalHomeController implements Initializable {
 
     private void onOpenInterfaces(ActionEvent actionEvent, String url, String title) {
         try {
-            Constants.closeStage(actionEvent);
+//            Constants.closeStage(actionEvent);
+            Constants.actionEvents.add(actionEvent);
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/assets/app-logo.png")).toExternalForm()));

@@ -27,7 +27,7 @@ public class NavController implements Initializable {
         title.setText("Dashboard");
         backBtn.setVisible(false);
         backBtn.managedProperty().bind(backBtn.visibleProperty());
-        userTypeLabel.setText(Constants.createTypeUserPayloadsForDirector.stream().filter(payload -> payload.getUtilisateurType() == Constants.utilisateur.getUserType()).findFirst().get().getName());
+        userTypeLabel.setText(Constants.createTypeUserPayloadsAll.stream().filter(payload -> payload.getUtilisateurType() == Constants.utilisateur.getUserType()).findFirst().get().getName());
     }
 
     public void onLogout(ActionEvent actionEvent) {

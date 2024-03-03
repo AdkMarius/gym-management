@@ -34,6 +34,8 @@ public class Constants {
 
     public static NavController navController;
 
+    public static List<ActionEvent> actionEvents = new ArrayList<>();
+
     public static final List<TypeUtilisateurPayload> createTypeUserPayloadsForManager = new ArrayList<>(List.of(
             new TypeUtilisateurPayload(TypeUtilisateur.MANAGER, "Manager"),
             new TypeUtilisateurPayload(TypeUtilisateur.RECEPTIONIST, "Receptionniste")));
@@ -41,6 +43,12 @@ public class Constants {
     public static final List<TypeUtilisateurPayload> createTypeUserPayloadsForDirector = new ArrayList<>(List.of(
             new TypeUtilisateurPayload(TypeUtilisateur.MANAGER, "Manager"),
             new TypeUtilisateurPayload(TypeUtilisateur.RECEPTIONIST, "Receptionniste"),
+            new TypeUtilisateurPayload(TypeUtilisateur.DIRECTOR, "Directeur")));
+
+    public static final List<TypeUtilisateurPayload> createTypeUserPayloadsAll = new ArrayList<>(List.of(
+            new TypeUtilisateurPayload(TypeUtilisateur.MANAGER, "Manager"),
+            new TypeUtilisateurPayload(TypeUtilisateur.RECEPTIONIST, "Receptionniste"),
+            new TypeUtilisateurPayload(TypeUtilisateur.SYSADMIN, "Sys admin"),
             new TypeUtilisateurPayload(TypeUtilisateur.DIRECTOR, "Directeur")));
 
 
@@ -83,14 +91,16 @@ public class Constants {
     }
 
     public static void onLogout(ActionEvent actionEvent) {
-        Node source = (Node) actionEvent.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
 
+        Constants.actionEvents.forEach(actionEvent1 -> {
+            Constants.onClose(actionEvent1);
+        });
+
+        Constants.onClose(actionEvent);
 
         try {
             Constants.logout();
-            stage = new Stage();
+            Stage stage = new Stage();
             stage.setTitle("Settings");
             stage.getIcons().add(new Image(Objects.requireNonNull(Constants.class.getResource("/assets/app-logo.png")).toExternalForm()));
             stage.setResizable(false);
@@ -103,5 +113,11 @@ public class Constants {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void onClose(ActionEvent actionEvent) {
+        Node source = (Node) actionEvent.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 }
