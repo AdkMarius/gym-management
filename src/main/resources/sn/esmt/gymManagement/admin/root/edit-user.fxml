@@ -20,7 +20,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="641.0" prefWidth="659.0" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.esmt.gymManagement.controllers.admin.root.EditUserController">
    <children>
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="25.0" layoutY="25.0" style="-fx-background-insets: 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -139,7 +138,7 @@
                               <RowConstraints prefHeight="20.0" />
                            </rowConstraints>
                         </SimpleComboBoxControl>
-                        <AnchorPane>
+                        <AnchorPane fx:id="roleContainer">
                            <children>
                               <VBox AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
                                  <children>
@@ -172,7 +171,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button fx:id="btnEdit" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onCancel" prefWidth="139.0" styleClass="button-secondary" text="Annuler">
+                                    <Button fx:id="btnCancel" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onCancel" prefWidth="139.0" styleClass="button-secondary" text="Annuler">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>

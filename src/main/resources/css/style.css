@@ -149,3 +149,9 @@
     -fx-fill: transparent;
     -fx-background-color: transparent;
 }
+
+.tags{
+    -fx-background-color: rgba(63, 152, 79, 0.25);
+    -fx-border-radius: 32px;
+    -fx-background-radius: 32px;
+}

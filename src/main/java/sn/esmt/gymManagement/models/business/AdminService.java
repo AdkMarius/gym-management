@@ -20,6 +20,9 @@ public interface AdminService {
 	int countRole() throws CrudDaoException;
 	
 	Utilisateur addUser(Utilisateur user) throws CrudDaoException;
-	
+	Utilisateur updateUser(int userId, Utilisateur user) throws CrudDaoException;
+
 	List<Utilisateur> getUsers() throws CrudDaoException;
+
+	void deleteUser(int id) throws CrudDaoException ;
 }

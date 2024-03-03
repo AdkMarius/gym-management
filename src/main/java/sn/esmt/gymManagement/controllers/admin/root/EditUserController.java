@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class EditUserController implements Initializable {
 
@@ -41,8 +42,9 @@ public class EditUserController implements Initializable {
     public ProgressIndicator loaderProgress;
     public HBox actionHBoxBtn;
     public Button btnAdd;
-    public Button btnEdit;
+    public Button btnCancel;
     public Label roleErrorLabel;
+    public AnchorPane roleContainer;
     private Utilisateur utilisateur;
     private AdminService adminService;
     private List<Role> roles = new ArrayList<>();
@@ -54,7 +56,18 @@ public class EditUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.adminService = AdminServiceImpl.getInstance();
-        this.userTypeCombo.getItems().addAll(Constants.typeUserPayloads);
+
+        this.userTypeCombo.getItems().clear();
+
+        switch (Constants.utilisateur.getUserType()) {
+            case DIRECTOR:
+                this.userTypeCombo.getItems().addAll(Constants.createTypeUserPayloadsForDirector);
+                break;
+            case MANAGER:
+            case SYSADMIN:
+                this.userTypeCombo.getItems().addAll(Constants.createTypeUserPayloadsForManager);
+                break;
+        }
     }
 
     public void loadData() {
@@ -72,6 +85,19 @@ public class EditUserController implements Initializable {
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+        if (this.utilisateur.getId() == 0) {
+            roleContainer.setVisible(false);
+            roleContainer.managedProperty().bind(roleContainer.visibleProperty());
+        } else {
+            btnAdd.setText("Modifier");
+            roleContainer.setVisible(true);
+            firstNameField.setText(utilisateur.getFirstName());
+            lastNameField.setText(utilisateur.getLastName());
+            emailField.setText(utilisateur.getEmail());
+            passwordField.setText(utilisateur.getPassword());
+            TypeUtilisateurPayload createTypeUserPayloadsForManager = Constants.createTypeUserPayloadsForManager.stream().filter(s -> s.getUtilisateurType() == utilisateur.getUserType()).findFirst().orElse(null);
+            userTypeCombo.getSelectionModel().select(createTypeUserPayloadsForManager);
+        }
     }
 
     public void setStage(Stage stage) {
@@ -139,10 +165,11 @@ public class EditUserController implements Initializable {
             passwordError.setText(Constants.formatText("Veuillez remplir le champ"));
         }
 
-        if (rolesList.size() == 0) {
-            hasError = true;
-            roleErrorLabel.setText(Constants.formatText("Veuillez choisir au moins un role"));
-        }
+
+//        if (rolesList.size() == 0) {
+//            hasError = true;
+//            roleErrorLabel.setText(Constants.formatText("Veuillez choisir au moins un role"));
+//        }
 
         if (hasError) return;
 
@@ -154,7 +181,7 @@ public class EditUserController implements Initializable {
         String usertype = String.valueOf(userTypeCombo.getValue());
         Optional<TypeUtilisateurPayload> typeOptional = Optional.empty();
         if (!usertype.trim().isEmpty()) {
-            typeOptional = Constants.typeUserPayloads.stream().filter(s -> s.getName().equals(usertype)).findFirst();
+            typeOptional = Constants.createTypeUserPayloadsForDirector.stream().filter(s -> s.getName().equals(usertype)).findFirst();
         }
         typeOptional.ifPresent(s -> {
             this.utilisateur.setUserType(s.getUtilisateurType());
@@ -165,7 +192,10 @@ public class EditUserController implements Initializable {
         this.utilisateur.setFirstName(firstNameField.getText().trim());
         this.utilisateur.setPassword(passwordField.getText().trim());
         this.utilisateur.setEmail(emailField.getText().trim());
-        this.utilisateur.setListRole(this.rolesList);
+
+        // todo : associate Role to the user manually
+
+        // this.utilisateur.setListRole(this.rolesList);
 
         if (Constants.utilisateur.getUserType() == TypeUtilisateur.DIRECTOR) {
             this.utilisateur.setActive(true);
@@ -174,7 +204,12 @@ public class EditUserController implements Initializable {
         new Thread(() -> {
             // TODO: 2/25/2024 Make DB request here 
             try {
-                this.utilisateur = this.adminService.addUser(this.utilisateur);
+                if (this.utilisateur.getId() == 0) {
+                    this.utilisateur = this.adminService.addUser(this.utilisateur);
+                } else {
+                    this.utilisateur = this.adminService.updateUser(this.utilisateur.getId(), this.utilisateur);
+                }
+
                 Platform.runLater(() -> Constants.closeStage(actionEvent));
             } catch (CrudDaoException e) {
                 e.printStackTrace();

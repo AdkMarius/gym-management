@@ -28,6 +28,7 @@ import sn.esmt.gymManagement.models.beans.Client;
 import sn.esmt.gymManagement.models.beans.Privilege;
 import sn.esmt.gymManagement.models.beans.Utilisateur;
 import sn.esmt.gymManagement.models.beans.enums.TypePrivilege;
+import sn.esmt.gymManagement.models.beans.enums.TypeUtilisateur;
 import sn.esmt.gymManagement.models.business.AuthService;
 import sn.esmt.gymManagement.models.business.AuthServiceImpl;
 import sn.esmt.gymManagement.payLoad.ApiResponse;
@@ -106,12 +107,11 @@ public class LoginController implements Initializable {
 
                     Platform.runLater(() -> {
                         Constants.closeStage(actionEvent);
-                        if (Constants.USER_PRIVILEGE.size() == TypePrivilege.values().length) {
+
+                        if (Constants.utilisateur.getUserType() != TypeUtilisateur.RECEPTIONIST) {
                             this.openAdminHome();
                         } else {
-                            // display employee interface
-                            this.openClientHome();
-
+                            this.openGymsManagementHome();
                         }
                     });
                 } else {
@@ -139,7 +139,6 @@ public class LoginController implements Initializable {
             }
         }).start();
     }
-
     private void loadPrivileges() {
         Constants.utilisateur.getListRole().forEach(role -> {
             Constants.USER_PRIVILEGE.addAll(role.getListPrivilege().stream().map(Privilege::getPrivilege).collect(Collectors.toList()));
@@ -164,9 +163,9 @@ public class LoginController implements Initializable {
 
     }
 
-    private void openClientHome() {
-
+    private void openGymsManagementHome() {
     }
+
 
     public void onPasswordForgot(ActionEvent actionEvent) {
     }

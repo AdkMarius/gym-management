@@ -51,8 +51,18 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public Utilisateur updateUser(int userId, Utilisateur user) throws CrudDaoException {
+		return repository.update(user);
+	}
+
+	@Override
 	public List<Utilisateur> getUsers() throws CrudDaoException {
 		return repository.list(Utilisateur.class);
+	}
+
+	@Override
+	public void deleteUser(int id) throws CrudDaoException {
+		repository.delete(id, Utilisateur.class);
 	}
 
 }

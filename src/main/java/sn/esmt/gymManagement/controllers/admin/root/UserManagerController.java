@@ -14,8 +14,11 @@ import javafx.stage.Stage;
 import sn.esmt.gymManagement.GymManagementApplication;
 import sn.esmt.gymManagement.exceptions.CrudDaoException;
 import sn.esmt.gymManagement.models.beans.Utilisateur;
+import sn.esmt.gymManagement.models.beans.enums.TypeUtilisateur;
 import sn.esmt.gymManagement.models.business.AdminService;
 import sn.esmt.gymManagement.models.business.AdminServiceImpl;
+import sn.esmt.gymManagement.utils.Constants;
+import sn.esmt.gymManagement.utils.RemoveListener;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,8 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
-public class UserManagerController implements Initializable {
+public class UserManagerController implements Initializable, RemoveListener<Utilisateur> {
 
     public ProgressIndicator loaderProgress;
     public VBox vBox;
@@ -46,6 +50,16 @@ public class UserManagerController implements Initializable {
         new Thread(() -> {
             try {
                 this.users = this.adminService.getUsers();
+
+                switch (Constants.utilisateur.getUserType()) {
+                    case MANAGER:
+                        this.users = this.users.stream().filter(user -> user.getUserType() == TypeUtilisateur.MANAGER || user.getUserType() == TypeUtilisateur.RECEPTIONIST).collect(Collectors.toList());
+                        break;
+                    case DIRECTOR:
+                        this.users = this.users.stream().filter(user -> user.getUserType() != TypeUtilisateur.SYSADMIN).collect(Collectors.toList());
+                        break;
+                }
+
                 this.users.forEach(user -> Platform.runLater(() -> this.addItem(user)));
             } catch (CrudDaoException e) {
                 e.printStackTrace();
@@ -61,6 +75,7 @@ public class UserManagerController implements Initializable {
             Parent userNode = loader.load();
             UserItemController itemController = loader.getController();
             itemController.setUtilisateur(user);
+            itemController.setRefreshUi(this);
             vBox.getChildren().add(userNode);
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,11 +99,16 @@ public class UserManagerController implements Initializable {
             stage.setScene(scene);
             dialogController.setStage(stage);
             stage.showAndWait();
-            if(dialogController.getUtilisateur() !=null ){
+            if (dialogController.getUtilisateur() != null) {
                 loadData();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void remove(Utilisateur utilisateur) {
+        this.loadData();
     }
 }
