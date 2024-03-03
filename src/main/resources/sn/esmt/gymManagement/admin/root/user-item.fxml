@@ -10,7 +10,6 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="108.0" prefWidth="959.0" styleClass="card-dash" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.esmt.gymManagement.controllers.admin.root.UserItemController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="625.0" spacing="100.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="22.0">
@@ -64,6 +63,7 @@
       </HBox>
       <MenuButton mnemonicParsing="false" prefHeight="37.0" prefWidth="21.0" styleClass="view-more" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="36.0">
          <items>
+            <MenuItem fx:id="activeGroupMenu" mnemonicParsing="false" onAction="#onActivate" text="Definir comme actif" />
             <MenuItem fx:id="editGroupMenu" mnemonicParsing="false" onAction="#onEdit" text="Modifier" />
             <MenuItem fx:id="deleteGroupMenu" mnemonicParsing="false" onAction="#onDelete" text="Supprimer" />
          </items>
@@ -77,5 +77,18 @@
             <Font size="14.0" />
          </font>
       </MenuButton>
+      <AnchorPane fx:id="unActivateTag" layoutX="709.0" layoutY="14.0" prefHeight="34.0" prefWidth="119.0" styleClass="tags" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="8.0">
+         <children>
+            <VBox alignment="CENTER" layoutX="21.0" layoutY="6.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label text="! Non activé" textFill="#3f984f">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

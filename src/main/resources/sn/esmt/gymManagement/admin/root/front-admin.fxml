@@ -115,7 +115,10 @@
                <center>
                   <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-insets: 0;" BorderPane.alignment="CENTER">
                      <content>
-                        <BorderPane fx:id="containerPane" prefHeight="578.0" prefWidth="723.0" style="-fx-background-color: #E9E9E9;" />
+                        <BorderPane fx:id="containerPane" prefHeight="578.0" prefWidth="723.0" style="-fx-background-color: #E9E9E9;">
+                           <padding>
+                              <Insets bottom="50.0" />
+                           </padding></BorderPane>
                      </content>
                   </ScrollPane>
                </center>

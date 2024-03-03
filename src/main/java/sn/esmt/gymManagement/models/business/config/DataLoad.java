@@ -60,6 +60,7 @@ public class DataLoad {
           utilisateur.setLastName("DOSSOU");
           utilisateur.setEmail("sysadmin@esmt.sn");
           utilisateur.setPassword("passer");
+          utilisateur.setActive(true);
           utilisateur.setUserType(TypeUtilisateur.SYSADMIN);
           utilisateur.addRole(role);
           adminService.addUser(utilisateur);

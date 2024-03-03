@@ -1,7 +1,7 @@
 package sn.esmt.gymManagement.models.beans;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -43,8 +43,11 @@ public class Client {
 	private String password;
 	
 	private String phoneNumber;
-	
-	private LocalDate dateOfBirth;
+	private String address;
+
+	private Date dateOfBirth;
+
+	private boolean firstConnection;
 	
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Souscription> subscribeList = new ArrayList<>();
@@ -52,7 +55,7 @@ public class Client {
 	public Client() {}
 
 	public Client(String firstName, String lastName, GenderType gender, TypePiece piece, String identifierPiece,
-			String email, String password, String phoneNumber, LocalDate dateOfBirth) {
+			String email, String password, String phoneNumber, java.util.Date dateOfBirth) {
 		
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
@@ -133,11 +136,11 @@ public class Client {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public LocalDate getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
@@ -155,5 +158,29 @@ public class Client {
 	
 	public void removeSubscribe(Souscription souscription) {
 		this.subscribeList.remove(souscription);
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getUsername() {
+		return firstName + " " + lastName;
+	}
+
+	public boolean isFirstConnection() {
+		return firstConnection;
+	}
+
+	public void setFirstConnection(boolean firstConnection) {
+		this.firstConnection = firstConnection;
+	}
+
+	public String getFullName() {
+		return firstName + " " + lastName;
 	}
 }
