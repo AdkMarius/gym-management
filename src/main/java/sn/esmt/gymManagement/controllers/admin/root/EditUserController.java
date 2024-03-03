@@ -61,10 +61,10 @@ public class EditUserController implements Initializable {
 
         switch (Constants.utilisateur.getUserType()) {
             case DIRECTOR:
+            case SYSADMIN:
                 this.userTypeCombo.getItems().addAll(Constants.createTypeUserPayloadsForDirector);
                 break;
             case MANAGER:
-            case SYSADMIN:
                 this.userTypeCombo.getItems().addAll(Constants.createTypeUserPayloadsForManager);
                 break;
         }
@@ -197,7 +197,7 @@ public class EditUserController implements Initializable {
 
         // this.utilisateur.setListRole(this.rolesList);
 
-        if (Constants.utilisateur.getUserType() == TypeUtilisateur.DIRECTOR) {
+        if (Constants.utilisateur.getUserType() == TypeUtilisateur.DIRECTOR || Constants.utilisateur.getUserType() == TypeUtilisateur.SYSADMIN) {
             this.utilisateur.setActive(true);
         }
 

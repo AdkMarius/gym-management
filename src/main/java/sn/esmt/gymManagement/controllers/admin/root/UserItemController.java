@@ -75,7 +75,7 @@ public class UserItemController implements Initializable {
         this.initialsLabel.setText(this.utilisateur.getFirstName().charAt(0) + "" + this.utilisateur.getLastName().charAt(0));
         this.lastNameLabel.setText(this.utilisateur.getLastName());
         this.firstnameLabel.setText(this.utilisateur.getFirstName());
-        Optional<TypeUtilisateurPayload> typeUtilisateur = Constants.createTypeUserPayloadsForDirector.stream().filter(typeUtilisateurPayload -> typeUtilisateurPayload.getUtilisateurType() == this.utilisateur.getUserType()).findFirst();
+        Optional<TypeUtilisateurPayload> typeUtilisateur = Constants.createTypeUserPayloadsAll.stream().filter(typeUtilisateurPayload -> typeUtilisateurPayload.getUtilisateurType() == this.utilisateur.getUserType()).findFirst();
         typeUtilisateur.ifPresent(typeUtilisateurPayload -> this.userTypeLabel.setText(typeUtilisateurPayload.getName()));
         this.emailLabel.setText(this.utilisateur.getEmail());
     }
